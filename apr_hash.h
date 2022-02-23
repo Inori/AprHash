@@ -100,7 +100,7 @@ APR_DECLARE(apr_hash_t *) apr_hash_make_custom(apr_pool_t *pool,
 /**
  * Destory a hash table, release all memories.
   */
-APR_DECLARE(void) apr_hash_destory(apr_pool_t* pool, apr_hash_t* h);
+APR_DECLARE(void) apr_hash_destroy(apr_hash_t* h);
 
 /**
  * Make a copy of a hash table

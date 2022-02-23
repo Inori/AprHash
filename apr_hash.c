@@ -133,10 +133,12 @@ APR_DECLARE(apr_hash_t *) apr_hash_make_custom(apr_pool_t *pool,
 }
 
 
-APR_DECLARE(void) apr_hash_destory(apr_pool_t* pool, apr_hash_t* h)
+APR_DECLARE(void) apr_hash_destroy(apr_hash_t* h)
 {
     // Link all nodes to free list.
     apr_hash_clear(h);
+
+    apr_pool_t* pool = h->pool;
     apr_hash_entry_t* old = h->free;
     while (old)
     {
@@ -230,6 +232,9 @@ static void expand_array(apr_hash_t *ht)
         hi->this->next = new_array[i];
         new_array[i] = hi->this;
     }
+
+    apr_pfree(ht->pool, ht->array);
+
     ht->array = new_array;
     ht->max = new_max;
 }
