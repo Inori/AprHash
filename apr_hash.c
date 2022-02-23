@@ -168,7 +168,7 @@ APR_DECLARE(apr_hash_index_t *) apr_hash_next(apr_hash_index_t *hi)
     return hi;
 }
 
-APR_DECLARE(apr_hash_index_t *) apr_hash_first(apr_pool_t *p, apr_hash_t *ht)
+APR_DECLARE(apr_hash_index_t *) apr_hash_first(apr_hash_t *ht)
 {
     apr_hash_index_t *hi;
 
@@ -227,7 +227,7 @@ static void expand_array(apr_hash_t *ht)
 
     new_max = ht->max * 2 + 1;
     new_array = alloc_array(ht, new_max);
-    for (hi = apr_hash_first(NULL, ht); hi; hi = apr_hash_next(hi)) {
+    for (hi = apr_hash_first(ht); hi; hi = apr_hash_next(hi)) {
         unsigned int i = hi->this->hash & new_max;
         hi->this->next = new_array[i];
         new_array[i] = hi->this;
@@ -451,7 +451,7 @@ APR_DECLARE(unsigned int) apr_hash_count(apr_hash_t *ht)
 APR_DECLARE(void) apr_hash_clear(apr_hash_t *ht)
 {
     apr_hash_index_t *hi;
-    for (hi = apr_hash_first(NULL, ht); hi; hi = apr_hash_next(hi))
+    for (hi = apr_hash_first(ht); hi; hi = apr_hash_next(hi))
         apr_hash_set(ht, hi->this->key, hi->this->klen, NULL);
 }
 

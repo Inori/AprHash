@@ -157,12 +157,12 @@ APR_DECLARE(void) apr_hash_erase(apr_hash_t* ht, const void* key,
  * @par Example:
  *
  * @code
- * int sum_values(apr_pool_t *p, apr_hash_t *ht)
+ * int sum_values(apr_hash_t *ht)
  * {
  *     apr_hash_index_t *hi;
  *     void *val;
  *     int sum = 0;
- *     for (hi = apr_hash_first(p, ht); hi; hi = apr_hash_next(hi)) {
+ *     for (hi = apr_hash_first(ht); hi; hi = apr_hash_next(hi)) {
  *         apr_hash_this(hi, NULL, NULL, &val);
  *         sum += *(int *)val;
  *     }
@@ -170,7 +170,7 @@ APR_DECLARE(void) apr_hash_erase(apr_hash_t* ht, const void* key,
  * }
  * @endcode
  */
-APR_DECLARE(apr_hash_index_t *) apr_hash_first(apr_pool_t *p, apr_hash_t *ht);
+APR_DECLARE(apr_hash_index_t *) apr_hash_first(apr_hash_t *ht);
 
 /**
  * Continue iterating over the entries in a hash table.
